@@ -6,13 +6,14 @@ function App() {
   useEffect(() => {
     async function getInfo() {
       try {
-        // const res = await fetch('/api/info');
-        const res = await fetch('/users');
+        const res = await fetch(
+          'https://node-sample-app-kbkl.onrender.com/api/info',
+        );
         if (!res.ok) {
           throw new Error('Failed fetching user information.');
         }
         const data = await res.json();
-        setUserInfo(data);
+        setUserInfo(data.users);
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -26,30 +27,29 @@ function App() {
   console.log(userInfo);
 
   return (
-    <div>{isLoading}hello</div>
-    // <div
-    //   style={{
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-around',
-    //   }}
-    // >
-    //   {isLoading ? (
-    //     <h1>Loading...</h1>
-    //   ) : (
-    //     userInfo.map((user) => (
-    //       <div style={{ backgroundColor: 'lightpink' }} key={user.id}>
-    //         <p>Name: {user.name}</p>
-    //         <p>Email: {user.email}</p>
-    //         <p>Age: {user.age}</p>
-    //         <p>
-    //           Address:{' '}
-    //           {`${user.address.city}, ${user.address.state}, ${user.address.country}`}
-    //         </p>
-    //       </div>
-    //     ))
-    //   )}
-    // </div>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}
+    >
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        userInfo.map((user) => (
+          <div style={{ backgroundColor: 'lightpink' }} key={user.id}>
+            <p>Name: {user.name}</p>
+            <p>Email: {user.email}</p>
+            <p>Age: {user.age}</p>
+            <p>
+              Address:{' '}
+              {`${user.address.city}, ${user.address.state}, ${user.address.country}`}
+            </p>
+          </div>
+        ))
+      )}
+    </div>
   );
 }
 
