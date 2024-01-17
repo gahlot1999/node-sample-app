@@ -13,6 +13,7 @@ app.get('/api/login', (req, res) => {
 });
 
 app.get('/api/info', (req, res) => {
+  console.log('data requested');
   res.json({
     users: [
       {
